@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/use-auth";
-import { lovable } from "@/integrations/lovable/index";
 import { supabase } from "@/integrations/supabase/client";
 
 type AuthSearch = { redirect?: string | undefined };
@@ -89,16 +88,20 @@ function AuthPage() {
 
   const google = async () => {
     setBusy(true);
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: `${window.location.origin}/auth?redirect=${encodeURIComponent(target)}`,
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth?redirect=${encodeURIComponent(target)}`,
+      },
     });
-    if (result.error) {
+    if (error) {
       setBusy(false);
-      toast.error("Google sign-in failed");
+      toast.error("Google sign-in failed: " + error.message);
       return;
     }
-    if (result.redirected) return;
-    navigate({ to: target });
+    if (data?.url) {
+      window.location.href = data.url;
+    }
   };
 
   return (
