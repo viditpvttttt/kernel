@@ -53,6 +53,21 @@ function AuthPage() {
   const target = safeRedirect(redirect);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      const errorMsg =
+        params.get("error_description") ||
+        params.get("error") ||
+        hashParams.get("error_description") ||
+        hashParams.get("error");
+      if (errorMsg) {
+        toast.error(decodeURIComponent(errorMsg.replace(/\+/g, " ")));
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     if (!loading && session) navigate({ to: target });
   }, [loading, session, navigate, target]);
 
@@ -88,19 +103,48 @@ function AuthPage() {
 
   const google = async () => {
     setBusy(true);
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth?redirect=${encodeURIComponent(target)}`,
-      },
-    });
-    if (error) {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${window.location.origin}/auth?redirect=${encodeURIComponent(target)}`,
+        },
+      });
+
+      if (error) {
+        toast.error("Google sign-in failed: " + error.message);
+        setBusy(false);
+        return;
+      }
+
+      if (data?.url) {
+        const check = await fetch(data.url, {
+          headers: {
+            apikey:
+              import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"] ||
+              process.env["SUPABASE_PUBLISHABLE_KEY"] ||
+              "",
+          },
+          redirect: "manual",
+        });
+
+        if (check.status === 400) {
+          const body = (await check.json().catch(() => null)) as { msg?: string } | null;
+          if (body?.msg?.includes("missing OAuth secret") || body?.msg?.includes("Unsupported provider")) {
+            toast.error(
+              "Google OAuth is not enabled or missing Client Secret in Supabase. Please configure Google provider in your Supabase Dashboard.",
+              { duration: 6000 }
+            );
+            setBusy(false);
+            return;
+          }
+        }
+
+        window.location.href = data.url;
+      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not initiate Google sign-in");
       setBusy(false);
-      toast.error("Google sign-in failed: " + error.message);
-      return;
-    }
-    if (data?.url) {
-      window.location.href = data.url;
     }
   };
 
