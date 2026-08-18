@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="theme" gradientUnits="userSpaceOnUse" x1="150" y1="15" x2="150" y2="285">
+          <stop offset="0%"   stop-color="#2F6FED"/>
+          <stop offset="20%"  stop-color="#5B93F0"/>
+          <stop offset="42%"  stop-color="#F2C24C"/>
+          <stop offset="62%"  stop-color="#F2963C"/>
+          <stop offset="83%"  stop-color="#E8593F"/>
+          <stop offset="100%" stop-color="#E23F72"/>
+        </linearGradient>
+        <radialGradient id="bleed" cx="50%" cy="42%" r="60%">
+          <stop offset="0%" stop-color="#F2963C" stop-opacity="0.4"/>
+          <stop offset="55%" stop-color="#E8593F" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="#E23F72" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="blur" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="16"/>
+        </filter>
+        <filter id="dropshadow" x="-40%" y="-40%" width="180%" height="180%">
+          <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#2A2050" flood-opacity="0.25"/>
+        </filter>
+      </defs>
+
+      <!-- ambient glow bleed behind the mark, matching the soft airbrushed dome -->
+      <circle cx="150" cy="150" r="130" fill="url(#bleed)" filter="url(#blur)"/>
+
+      <g filter="url(#dropshadow)">
+        <!-- white sticker outline, drawn first so overlaps merge into one border -->
+        <g fill="none" stroke="#FFFFFF" stroke-width="68" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="70" y1="190" x2="270" y2="275"/>
+          <line x1="140" y1="30" x2="140" y2="270"/>
+          <line x1="70" y1="110" x2="270" y2="25"/>
+        </g>
+
+        <!-- three ribbons, back to front, one shared gradient -->
+        <line x1="70" y1="190" x2="270" y2="275" stroke="url(#theme)" stroke-width="46"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <ellipse cx="140" cy="220" rx="30" ry="20" fill="#1C1730" opacity="0.14"/>
+
+        <line x1="140" y1="30" x2="140" y2="270" stroke="url(#theme)" stroke-width="46"
+              stroke-linecap="round" stroke-linejoin="round"/>
+
+        <line x1="70" y1="110" x2="270" y2="25" stroke="url(#theme)" stroke-width="46"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <ellipse cx="140" cy="80" rx="30" ry="20" fill="#1C1730" opacity="0.12"/>
+
+        <!-- soft highlight along the top ribbon for dimensionality -->
+        <line x1="80" y1="102" x2="255" y2="30" stroke="#FFFFFF" stroke-opacity="0.22"
+              stroke-width="10" stroke-linecap="round"/>
+      </g>
+    </svg>

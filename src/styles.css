@@ -1,0 +1,378 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Kernel design system — ambient, neutral, minimal.
+ * Warm paper ground + soft aurora field + ink typography.
+ * All color values use oklch. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --color-aurora-1: var(--aurora-1);
+  --color-aurora-2: var(--aurora-2);
+  --color-aurora-3: var(--aurora-3);
+  --color-aurora-4: var(--aurora-4);
+  --color-aurora-5: var(--aurora-5);
+  --animate-aurora: aurora 26s ease-in-out infinite;
+  --animate-drift: drift 18s ease-in-out infinite;
+  --animate-rise: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 1.25rem;
+
+  --cream: oklch(0.962 0.008 85);
+  --ink: oklch(0.16 0.014 300);
+
+  --background: oklch(0.962 0.008 85);
+  --foreground: oklch(0.16 0.014 300);
+  --card: oklch(0.988 0.004 85);
+  --card-foreground: oklch(0.16 0.014 300);
+  --popover: oklch(0.988 0.004 85);
+  --popover-foreground: oklch(0.16 0.014 300);
+  --primary: oklch(0.16 0.014 300);
+  --primary-foreground: oklch(0.975 0.006 85);
+  --secondary: oklch(0.93 0.009 85);
+  --secondary-foreground: oklch(0.22 0.014 300);
+  --muted: oklch(0.935 0.008 85);
+  --muted-foreground: oklch(0.52 0.012 290);
+  --accent: oklch(0.918 0.014 60);
+  --accent-foreground: oklch(0.2 0.014 300);
+  --destructive: oklch(0.58 0.2 22);
+  --destructive-foreground: oklch(0.98 0.004 85);
+  --border: oklch(0.885 0.008 85);
+  --input: oklch(0.9 0.008 85);
+  --ring: oklch(0.66 0.06 300);
+
+  /* Aurora field — soft spectral wash used across landing + chat */
+  --aurora-1: oklch(0.9 0.09 95);
+  --aurora-2: oklch(0.88 0.1 30);
+  --aurora-3: oklch(0.87 0.09 350);
+  --aurora-4: oklch(0.88 0.08 290);
+  --aurora-5: oklch(0.9 0.07 220);
+
+  --chart-1: oklch(0.86 0.1 95);
+  --chart-2: oklch(0.85 0.1 30);
+  --chart-3: oklch(0.84 0.1 350);
+  --chart-4: oklch(0.85 0.09 290);
+  --chart-5: oklch(0.86 0.08 220);
+
+  --sidebar: oklch(0.948 0.007 85);
+  --sidebar-foreground: oklch(0.16 0.014 300);
+  --sidebar-primary: oklch(0.16 0.014 300);
+  --sidebar-primary-foreground: oklch(0.975 0.006 85);
+  --sidebar-accent: oklch(0.92 0.009 85);
+  --sidebar-accent-foreground: oklch(0.2 0.014 300);
+  --sidebar-border: oklch(0.888 0.008 85);
+  --sidebar-ring: oklch(0.66 0.06 300);
+
+  /* Apple-Intelligence-style spectrum — used for the mic ring, focus glow,
+     voice orb and click-ripple accents. Same five stops as the Kernel mark. */
+  --spectrum-1: #2f6fed;
+  --spectrum-2: #7c6cf2;
+  --spectrum-3: #f2c24c;
+  --spectrum-4: #f2963c;
+  --spectrum-5: #e23f72;
+}
+
+.dark {
+  --cream: oklch(0.19 0.012 300);
+  --ink: oklch(0.96 0.005 85);
+
+  --background: oklch(0.16 0.012 300);
+  --foreground: oklch(0.955 0.005 85);
+  --card: oklch(0.208 0.014 300);
+  --card-foreground: oklch(0.955 0.005 85);
+  --popover: oklch(0.208 0.014 300);
+  --popover-foreground: oklch(0.955 0.005 85);
+  --primary: oklch(0.955 0.005 85);
+  --primary-foreground: oklch(0.17 0.012 300);
+  --secondary: oklch(0.26 0.014 300);
+  --secondary-foreground: oklch(0.955 0.005 85);
+  --muted: oklch(0.25 0.013 300);
+  --muted-foreground: oklch(0.72 0.014 290);
+  --accent: oklch(0.28 0.02 320);
+  --accent-foreground: oklch(0.96 0.005 85);
+  --destructive: oklch(0.68 0.18 22);
+  --destructive-foreground: oklch(0.97 0.004 85);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.62 0.06 300);
+
+  --aurora-1: oklch(0.62 0.13 95);
+  --aurora-2: oklch(0.6 0.15 30);
+  --aurora-3: oklch(0.58 0.15 350);
+  --aurora-4: oklch(0.58 0.14 290);
+  --aurora-5: oklch(0.6 0.12 220);
+
+  --sidebar: oklch(0.185 0.013 300);
+  --sidebar-foreground: oklch(0.955 0.005 85);
+  --sidebar-primary: oklch(0.955 0.005 85);
+  --sidebar-primary-foreground: oklch(0.17 0.012 300);
+  --sidebar-accent: oklch(0.26 0.014 300);
+  --sidebar-accent-foreground: oklch(0.955 0.005 85);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.62 0.06 300);
+
+  --spectrum-1: #5b93f0;
+  --spectrum-2: #9b8ff5;
+  --spectrum-3: #f2c24c;
+  --spectrum-4: #f2a35c;
+  --spectrum-5: #ea6690;
+}
+
+@keyframes aurora {
+  0%,
+  100% {
+    transform: translate3d(-4%, -2%, 0) scale(1.05) rotate(0deg);
+  }
+  33% {
+    transform: translate3d(5%, 3%, 0) scale(1.18) rotate(6deg);
+  }
+  66% {
+    transform: translate3d(-2%, 5%, 0) scale(1.1) rotate(-5deg);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(3%, -4%, 0) scale(1.12);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* "Apple AI gradient" — a slow conic spectrum sweep. Used for the mic
+   button, the voice orb ring, and the chatbox focus glow. */
+@keyframes spectrum-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@utility spectrum-ring {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1.5px;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+      from 0deg,
+      var(--spectrum-1),
+      var(--spectrum-2),
+      var(--spectrum-3),
+      var(--spectrum-4),
+      var(--spectrum-5),
+      var(--spectrum-1)
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: spectrum-spin 5s linear infinite;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  &[data-active="true"]::before {
+    opacity: 1;
+  }
+}
+
+/* "Dia" voice-open animation — a single spectral blob that unfurls from a
+   point into a soft breathing mass. Drives the voice-chat orb. */
+@keyframes dia-unfurl {
+  0% {
+    transform: scale(0.35);
+    opacity: 0;
+    filter: blur(2px);
+  }
+  55% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dia-breathe {
+  0%,
+  100% {
+    border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+    transform: scale(1) rotate(0deg);
+  }
+  33% {
+    border-radius: 60% 40% 45% 55% / 55% 40% 60% 45%;
+    transform: scale(1.05) rotate(6deg);
+  }
+  66% {
+    border-radius: 48% 52% 38% 62% / 60% 48% 52% 40%;
+    transform: scale(0.97) rotate(-5deg);
+  }
+}
+
+@keyframes dia-breathe-fast {
+  0%,
+  100% {
+    border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    border-radius: 58% 42% 40% 60% / 62% 45% 55% 38%;
+    transform: scale(1.14) rotate(-8deg);
+  }
+}
+
+/* "Shader gradient" click burst — used when the chatbox is focused/clicked. */
+@keyframes shader-burst {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.55;
+  }
+  70% {
+    opacity: 0.28;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@keyframes shader-mesh-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0) scale(1.08);
+  }
+}
+
+@keyframes waveform-bar {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* Fine film grain overlay used over the aurora field */
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.045;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Frosted paper panel */
+@utility panel {
+  background-color: color-mix(in oklab, var(--card) 72%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+}
+
+@utility display-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--aurora-3) 55%, transparent);
+  }
+}
