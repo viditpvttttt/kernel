@@ -122,11 +122,14 @@ function ThreadRail() {
   };
 
   return (
-    <aside className="relative hidden w-64 shrink-0 flex-col border-r border-border/70 bg-background/45 backdrop-blur-xl md:flex">
+    <aside className="relative hidden w-64 shrink-0 flex-col border-r border-foreground/[0.06] bg-background/55 backdrop-blur-xl md:flex">
       <div className="flex items-center justify-between px-4 py-4">
         <Link to="/">
           <KernelWordmark className="text-base [&_span]:text-[1.15rem]" />
         </Link>
+        <span className="text-[0.6rem] uppercase tracking-[0.2em] text-muted-foreground">
+          Threads
+        </span>
       </div>
 
       <div className="space-y-2 px-3">
