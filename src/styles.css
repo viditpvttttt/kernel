@@ -373,6 +373,30 @@
     0 30px 60px -34px color-mix(in oklab, var(--foreground) 40%, transparent);
 }
 
+/* Grainy spectral strip: sky → lavender → blush → warm ember, drifting slowly. */
+@utility spectral-strip {
+  position: relative;
+  background-image: linear-gradient(
+    90deg,
+    var(--aurora-5) 0%,
+    color-mix(in oklab, var(--aurora-5) 55%, var(--aurora-3)) 26%,
+    var(--aurora-3) 48%,
+    color-mix(in oklab, var(--aurora-3) 45%, var(--aurora-1)) 72%,
+    var(--aurora-1) 100%
+  );
+  background-size: 180% 100%;
+  animation: strip-drift 26s ease-in-out infinite alternate;
+}
+
+@keyframes strip-drift {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
 @utility display-title {
   font-family: var(--font-display);
   font-weight: 400;
