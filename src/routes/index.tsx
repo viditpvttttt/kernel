@@ -144,6 +144,15 @@ function Hero() {
   );
 }
 
+/** Grainy spectral gradient strip — the signature band from the reference art. */
+function SpectralStrip() {
+  return (
+    <Reveal className="relative mx-auto max-w-6xl px-6">
+      <div className="grain spectral-strip h-24 w-full overflow-hidden rounded-2xl opacity-90 sm:h-28" />
+    </Reveal>
+  );
+}
+
 function ModelBand() {
   const rail = [...KERNEL_MODELS, ...KERNEL_MODELS];
   return (
