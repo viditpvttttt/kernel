@@ -37,6 +37,7 @@ function Landing() {
       <PillNav />
       <main className="relative">
         <Hero />
+        <SpectralStrip />
         <ModelBand />
         <FeatureBento />
         <WorkspacePreview />
