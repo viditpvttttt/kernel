@@ -173,7 +173,7 @@ function ThreadChat({
 
   return (
     <>
-      <header className="flex items-center justify-between gap-3 border-b border-border/70 bg-background/40 px-5 py-3 backdrop-blur-xl">
+      <header className="flex items-center justify-between gap-3 border-b border-foreground/[0.06] bg-background/50 px-5 py-3 backdrop-blur-xl">
         <div className="min-w-0">
           <h1 className="truncate text-sm font-medium">{title || "New thread"}</h1>
           <p className="text-xs text-muted-foreground">{activeModel.blurb}</p>
