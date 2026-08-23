@@ -269,7 +269,7 @@ function ThreadChat({
         <ConversationScrollButton />
       </Conversation>
 
-      <div className="border-t border-border/70 bg-background/40 px-4 py-4 backdrop-blur-xl">
+      <div className="border-t border-foreground/[0.06] bg-background/50 px-4 py-4 backdrop-blur-xl">
         <div className="mx-auto w-full max-w-3xl">
           <ShaderClickField className="rounded-3xl">
             <div
