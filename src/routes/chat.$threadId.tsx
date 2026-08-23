@@ -184,9 +184,9 @@ function ThreadChat({
       <Conversation className="flex-1">
         <ConversationContent className="mx-auto w-full max-w-3xl px-4 py-8">
           {messages.length === 0 && (
-            <div className="flex flex-col items-center py-20 text-center">
+            <div className="flex animate-fade-in flex-col items-center py-20 text-center">
               <KernelMark className="h-12 w-12" />
-              <h2 className="display-title mt-6 text-3xl">What are we thinking about?</h2>
+              <h2 className="display-title mt-6 text-4xl italic">What are we thinking about?</h2>
               <p className="mt-2 max-w-sm text-sm text-muted-foreground">
                 Ask anything, or tap the mic to talk. Switch models mid-thread — the context stays
                 with you.
