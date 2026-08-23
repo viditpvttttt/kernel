@@ -173,7 +173,7 @@ function ThreadChat({
 
   return (
     <>
-      <header className="flex items-center justify-between gap-3 border-b border-border/70 bg-background/40 px-5 py-3 backdrop-blur-xl">
+      <header className="flex items-center justify-between gap-3 border-b border-foreground/[0.06] bg-background/50 px-5 py-3 backdrop-blur-xl">
         <div className="min-w-0">
           <h1 className="truncate text-sm font-medium">{title || "New thread"}</h1>
           <p className="text-xs text-muted-foreground">{activeModel.blurb}</p>
@@ -184,9 +184,9 @@ function ThreadChat({
       <Conversation className="flex-1">
         <ConversationContent className="mx-auto w-full max-w-3xl px-4 py-8">
           {messages.length === 0 && (
-            <div className="flex flex-col items-center py-20 text-center">
+            <div className="flex animate-fade-in flex-col items-center py-20 text-center">
               <KernelMark className="h-12 w-12" />
-              <h2 className="display-title mt-6 text-3xl">What are we thinking about?</h2>
+              <h2 className="display-title mt-6 text-4xl italic">What are we thinking about?</h2>
               <p className="mt-2 max-w-sm text-sm text-muted-foreground">
                 Ask anything, or tap the mic to talk. Switch models mid-thread — the context stays
                 with you.
@@ -269,7 +269,7 @@ function ThreadChat({
         <ConversationScrollButton />
       </Conversation>
 
-      <div className="border-t border-border/70 bg-background/40 px-4 py-4 backdrop-blur-xl">
+      <div className="border-t border-foreground/[0.06] bg-background/50 px-4 py-4 backdrop-blur-xl">
         <div className="mx-auto w-full max-w-3xl">
           <ShaderClickField className="rounded-3xl">
             <div
